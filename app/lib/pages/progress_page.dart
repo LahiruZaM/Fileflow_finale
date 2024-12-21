@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:common/model/dto/file_dto.dart';
+
 import 'package:common/model/file_status.dart';
 import 'package:common/model/session_status.dart';
 import 'package:fileflow/config/theme.dart';
@@ -35,12 +36,14 @@ class ProgressPage extends StatefulWidget {
   final bool closeSessionOnClose;
   final String sessionId;
 
+  
   const ProgressPage({
     required this.showAppBar,
     required this.closeSessionOnClose,
     required this.sessionId,
   });
 
+  
   @override
   State<ProgressPage> createState() => _ProgressPageState();
 }
