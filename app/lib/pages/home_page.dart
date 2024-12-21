@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:desktop_drop/desktop_drop.dart';
@@ -14,8 +15,11 @@ import 'package:fileflow/widget/responsive_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 
+
+// Enum to define different tabs in the HomePage
 enum HomeTab {
   receive(Icons.wifi),
+  
   send(Icons.send),
   settings(Icons.settings);
 
@@ -23,6 +27,7 @@ enum HomeTab {
 
   final IconData icon;
 
+  // Getter for the label of each tab
   String get label {
     switch (this) {
       case HomeTab.receive:
