@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 
+
 class SendPage extends StatefulWidget {
   final bool showAppBar;
   final bool closeSessionOnClose;
@@ -58,6 +59,7 @@ class _SendPageState extends State<SendPage> with Refena {
     ref.notifier(sendProvider).cancelSession(widget.sessionId);
   }
 
+  
   @override
   Widget build(BuildContext context) {
     final sendState = ref.watch(sendProvider.select((state) => state[widget.sessionId]), listener: (prev, next) {
