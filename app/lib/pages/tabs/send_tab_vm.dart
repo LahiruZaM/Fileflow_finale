@@ -24,6 +24,9 @@ import 'package:flutter/material.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 
+
+// ViewModel for the Send Tab which holds the state and actions for file sending
+
 class SendTabVm {
   final SendMode sendMode;
   final List<CrossFile> selectedFiles;
@@ -192,7 +195,7 @@ class SendTabInitAction extends AsyncGlobalAction {
   Future<void> reduce() async {
     final devices = ref.read(nearbyDevicesProvider).devices;
     if (devices.isEmpty) {
-      await dispatchAsync(StartSmartScan(forceLegacy: false));
+      await dispatchAsync(StartSmartScan(forceLegacy: false)); // Start a smart scan if no nearby devices are found
     }
   }
 }
