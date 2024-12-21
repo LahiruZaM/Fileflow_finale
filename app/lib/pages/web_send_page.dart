@@ -73,7 +73,7 @@ class _WebSendPageState extends State<WebSendPage> with Refena {
     }
   }
 
-  /// Web share uses unencrypted http, so we need to revert to the previous state.
+  
   Future<void> _revertServerState() async {
     await ref.notifier(serverProvider).restartServerFromSettings();
   }
