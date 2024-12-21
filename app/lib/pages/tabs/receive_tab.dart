@@ -13,6 +13,7 @@ import 'package:fileflow/widget/responsive_list_view.dart';
 import 'package:fileflow/widget/rotating_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:refena_flutter/refena_flutter.dart';
+
 import 'package:routerino/routerino.dart';
 
 class ReceiveTab extends StatelessWidget {
@@ -37,6 +38,7 @@ class ReceiveTab extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const FileFlowLogo(withText: false),
+                        
                         // InitialFadeTransition(
                         //   duration: const Duration(milliseconds: 300),
                         //   delay: const Duration(milliseconds: 200),
@@ -50,6 +52,7 @@ class ReceiveTab extends StatelessWidget {
                         //     );
                         //   }),
                         // ),
+                        
                         FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(vm.serverState?.alias ?? vm.aliasSettings, style: const TextStyle(fontSize: 48)),
