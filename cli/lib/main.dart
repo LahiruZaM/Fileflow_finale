@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:args/args.dart';
@@ -19,6 +20,7 @@ Future<void> main(List<String> arguments) async {
 
   final receive = results['receive'] as bool;
   final send = results['send'] as bool;
+  
 
   if (receive) {
     print('Starting server...');
@@ -28,6 +30,7 @@ Future<void> main(List<String> arguments) async {
     _printUsage(parser);
   }
 }
+
 
 void _printUsage(ArgParser parser) {
   print('The LocalSend CLI to send and receive files locally.');
