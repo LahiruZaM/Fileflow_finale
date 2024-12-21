@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:common/model/session_status.dart';
@@ -24,8 +22,6 @@ import 'package:flutter/services.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-
 
 class ReceivePage extends StatefulWidget {
   const ReceivePage({super.key});
