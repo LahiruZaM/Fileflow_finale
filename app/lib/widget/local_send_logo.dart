@@ -1,3 +1,4 @@
+
 import 'package:fileflow/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,7 @@ class FileFlowLogo extends StatelessWidget {
   final bool withText;
 
   const FileFlowLogo({required this.withText});
+  
 
   @override
   Widget build(BuildContext context) {
