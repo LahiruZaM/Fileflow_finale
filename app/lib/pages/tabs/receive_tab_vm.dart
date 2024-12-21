@@ -8,8 +8,10 @@ import 'package:fileflow/widget/dialogs/quick_save_notice.dart';
 import 'package:flutter/material.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 
+
 /// Whether the advanced network info is shown
 final _showAdvancedProvider = StateProvider<bool>((ref) => false, debugLabel: '_showAdvancedProvider');
+
 
 /// Whether the history button is shown
 /// This extra boolean is needed to delay the animation
@@ -27,6 +29,7 @@ class ReceiveTabVm {
   final Future<void> Function(BuildContext context, bool enable) onSetQuickSave;
   final Future<void> Function(BuildContext context, bool enable) onSetQuickSaveFromFavorites;
 
+  
   const ReceiveTabVm({
     required this.aliasSettings,
     required this.quickSaveSettings,
@@ -71,6 +74,7 @@ final receiveTabVmProvider = ViewProvider((ref) {
       if (enable && context.mounted) {
         await QuickSaveNotice.open(context);
       }
+      
     },
     onSetQuickSaveFromFavorites: (context, enable) async {
       await ref.notifier(settingsProvider).setQuickSaveFromFavorites(enable);
