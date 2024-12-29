@@ -1,6 +1,5 @@
 
 import 'dart:io';
-
 import 'package:common/constants.dart';
 import 'package:common/model/device.dart';
 import 'package:fileflow/config/theme.dart';
