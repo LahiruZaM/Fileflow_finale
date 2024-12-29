@@ -12,11 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 
-
 class SelectedFilesPage extends StatelessWidget {
   const SelectedFilesPage();
-
-
   
   @override
   Widget build(BuildContext context) {
