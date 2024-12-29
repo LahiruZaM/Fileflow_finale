@@ -32,6 +32,7 @@ import 'package:refena_flutter/refena_flutter.dart';
 import 'package:routerino/routerino.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 class SettingsTab extends StatelessWidget {
   const SettingsTab();
 
@@ -65,6 +66,7 @@ class SettingsTab extends StatelessWidget {
                     }).toList(),
                     onChanged: (theme) => vm.onChangeTheme(context, theme),
                   ),
+                  
                 ),
                 _SettingsEntry(
                   label: t.settingsTab.general.color,
