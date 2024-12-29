@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-
 import 'package:common/model/file_type.dart';
 import 'package:fileflow/gen/strings.g.dart';
 import 'package:fileflow/provider/selection/selected_sending_files_provider.dart';
