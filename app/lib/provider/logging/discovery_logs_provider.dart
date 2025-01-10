@@ -12,6 +12,7 @@ final discoveryLoggerProvider = NotifierProvider<DiscoveryLogger, List<LogEntry>
 class DiscoveryLogger extends Notifier<List<LogEntry>> {
   DiscoveryLogger();
 
+  // Initializes the state with an empty list of LogEntry.
   @override
   List<LogEntry> init() {
     return [];
@@ -25,6 +26,7 @@ class DiscoveryLogger extends Notifier<List<LogEntry>> {
     ].take(200).toList();
   }
 
+  // Clears the log entries, resetting the state to an empty list.
   void clear() {
     state = [];
   }
