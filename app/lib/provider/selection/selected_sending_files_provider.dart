@@ -77,7 +77,7 @@ class UpdateMessageAction extends ReduxAction<SelectedSendingFilesNotifier, List
   }
 }
 
-/// Adds a binary file to the list.
+/// Adds a binary file to the list, such as an image or a document.
 /// During the sending process, the file will be read from the memory.
 class AddBinaryAction extends ReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
   final Uint8List bytes;
@@ -141,7 +141,7 @@ class AddFilesAction<T> extends AsyncReduxAction<SelectedSendingFilesNotifier, L
   }
 }
 
-/// Adds files inside the directory recursively.
+/// Recursively adds files from a directory to the list.
 class AddDirectoryAction extends AsyncReduxAction<SelectedSendingFilesNotifier, List<CrossFile>> {
   final String directoryPath;
 
