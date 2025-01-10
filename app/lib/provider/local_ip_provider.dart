@@ -73,6 +73,8 @@ class _FetchLocalIpAction extends AsyncReduxAction<LocalIpService, NetworkState>
   }
 }
 
+/// Fetches the IP address using third-party plugins and native methods.
+/// Attempts to ensure robust IP detection with fallbacks
 Future<List<String>> _getIp() async {
   final info = plugin.NetworkInfo();
   String? ip;
