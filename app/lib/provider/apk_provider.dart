@@ -28,6 +28,7 @@ final apkProvider = ViewProvider<AsyncValue<List<Application>>>((ref) {
             apps = apps.where((a) => a.appName.toLowerCase().contains(query) || a.packageName.contains(query)).toList();
           }
 
+          // Sorts applications alphabetically by name.
           apps.sort((a, b) => a.appName.compareTo(b.appName));
           return AsyncValue<List<Application>>.data(apps);
         },
@@ -35,6 +36,7 @@ final apkProvider = ViewProvider<AsyncValue<List<Application>>>((ref) {
       );
 });
 
+/// Provider to calculate the size of an APK file given its file path.
 final apkSizeProvider = FutureFamilyProvider<int, String>((_, path) {
   return File(path).length();
 });
