@@ -17,13 +17,13 @@ class LastDevicesService extends ReduxNotifier<List<Device>> {
 class AddLastDeviceAction extends ReduxAction<LastDevicesService, List<Device>> {
   final Device device;
 
-  AddLastDeviceAction(this.device);
+  AddLastDeviceAction(this.device); // Constructor to initialize the device to be added.
 
   @override
   List<Device> reduce() {
     return {
       device,
       ...state,
-    }.take(5).toList();
+    }.take(5).toList(); // Limits the list to the last 5 devices.
   }
 }
