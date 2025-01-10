@@ -18,15 +18,15 @@ class HttpLogsService extends Notifier<List<LogEntry>> {
   void addLog(String log) {
     _logger.info(log);
     state = [
-      ...state,
-      LogEntry(timestamp: DateTime.now(), log: log),
-    ].take(200).toList();
+      ...state, // Add the new log entry to the existing state
+      LogEntry(timestamp: DateTime.now(), log: log), // New log entry with timestamp
+    ].take(200).toList(); // Ensure the list does not exceed 200 logs
   }
 
   void clear() {
-    state = [];
+    state = []; // Clears the current state, effectively removing all logs
   }
 
   @override
-  String describeState(List<LogEntry> state) => '${state.length} logs';
+  String describeState(List<LogEntry> state) => '${state.length} logs'; // Describes the current state by showing the number of logs
 }
