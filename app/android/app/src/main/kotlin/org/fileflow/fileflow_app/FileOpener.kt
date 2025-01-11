@@ -6,21 +6,35 @@ import android.net.Uri
 import android.provider.DocumentsContract
 import java.util.Locale
 
+/**
+ * Opens a URI by inferring its type and launching an appropriate intent for viewing it.
+ * 
+ * @param context The context in which the activity is started.
+ * @param uriStr The URI string to open.
+ */
 fun openUri(context: Context, uriStr: String) {
-    val uri = Uri.parse(uriStr)
-    val intent = Intent(Intent.ACTION_VIEW, uri)
-    val type = getFileType(uriStr)
+    val uri = Uri.parse(uriStr)  // Parse the URI string into a Uri object
+    val intent = Intent(Intent.ACTION_VIEW, uri)  // Create an intent to view the URI
+    val type = getFileType(uriStr)  // Get the MIME type based on the file extension
 
-    println("Inferred type: $type")
+    println("Inferred type: $type")  // Log the inferred MIME type
 
-    intent.setDataAndType(uri, type)
-    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-    context.startActivity(intent)
+    intent.setDataAndType(uri, type)  // Set the URI and MIME type to the intent
+    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)  // Grant permission to read the URI
+    context.startActivity(intent)  // Start the activity with the intent
 }
 
+/**
+ * Determines the MIME type for a file based on its extension.
+ * 
+ * @param filePath The path of the file.
+ * @return The inferred MIME type for the file.
+ */
 private fun getFileType(filePath: String): String {
-    val fileExt = filePath.substring(filePath.lastIndexOf(".") + 1).lowercase(Locale.ROOT)
-    println("File extension: $fileExt")
+    val fileExt = filePath.substring(filePath.lastIndexOf(".") + 1).lowercase(Locale.ROOT)  // Extract and lowercase the file extension
+    println("File extension: $fileExt")  // Log the file extension
+
+    // Return the MIME type based on the file extension
     return when (fileExt) {
         "3gp" -> "video/3gpp"
         "torrent" -> "application/x-bittorrent"
@@ -88,6 +102,6 @@ private fun getFileType(filePath: String): String {
         "xml" -> "text/plain"
         "z" -> "application/x-compress"
         "zip" -> "application/x-zip-compressed"
-        else -> DocumentsContract.Document.MIME_TYPE_DIR
+        else -> DocumentsContract.Document.MIME_TYPE_DIR  // Default MIME type for directories
     }
 }
