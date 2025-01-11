@@ -6,6 +6,7 @@ import 'package:fileflow/util/native/platform_check.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 
+/// Provider to manage purchase-related state and actions.
 final purchaseProvider = ReduxProvider<PurchaseService, PurchaseState>((ref) {
   return PurchaseService();
 });
@@ -34,6 +35,8 @@ class InitPurchaseStream extends AsyncReduxAction<PurchaseService, PurchaseState
   }
 }
 
+/// Fetches prices and restores purchases if supported by the platform.
+/// Prevents duplicate fetching of prices.
 class FetchPricesAndPurchasesAction extends AsyncReduxAction<PurchaseService, PurchaseState> {
   @override
   Future<PurchaseState> reduce() async {
@@ -43,7 +46,7 @@ class FetchPricesAndPurchasesAction extends AsyncReduxAction<PurchaseService, Pu
     }
 
     if (state.prices.isNotEmpty) {
-      emitMessage('Already fetched');
+      emitMessage('Already fetched'); // Skips fetching if prices are already available.
       return state;
     }
 
@@ -59,7 +62,7 @@ class FetchPricesAndPurchasesAction extends AsyncReduxAction<PurchaseService, Pu
 }
 
 /// Fetches prices for all products.
-/// They come from the platform's store and vary by country.
+/// Prices come from the platform's store and vary by country.
 class FetchPricesAction extends AsyncReduxAction<PurchaseService, PurchaseState> {
   @override
   Future<PurchaseState> reduce() async {
@@ -103,7 +106,7 @@ class _HandlePurchaseUpdate extends AsyncReduxAction<PurchaseService, PurchaseSt
       if (purchaseEnum == null) {
         throw 'Unknown product ID: ${purchase.productID}';
       }
-      dispatch(AddPurchaseAction(purchaseEnum, purchase));
+      dispatch(AddPurchaseAction(purchaseEnum, purchase)); // Adds a completed or restored purchase.
     }
 
     if (purchase.pendingCompletePurchase) {
@@ -118,6 +121,7 @@ class _HandlePurchaseUpdate extends AsyncReduxAction<PurchaseService, PurchaseSt
   String get debugLabel => 'HandlePurchaseUpdate(${purchase.status}, ${purchase.productID})';
 }
 
+/// Adds a completed purchase to the purchase state.
 class AddPurchaseAction extends ReduxAction<PurchaseService, PurchaseState> {
   final PurchaseItem item;
   final PurchaseDetails purchase;

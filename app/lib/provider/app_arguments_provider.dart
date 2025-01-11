@@ -1,6 +1,6 @@
 import 'package:refena_flutter/refena_flutter.dart';
 
-/// Contains the arguments with which the app was started.
+/// Provides the arguments passed to the app at the time of startup.
 final appArgumentsProvider = Provider(
   (ref) => <String>[],
   debugLabel: 'appArgumentsProvider',

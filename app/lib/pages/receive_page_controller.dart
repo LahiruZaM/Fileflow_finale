@@ -11,20 +11,24 @@ import 'package:routerino/routerino.dart';
 
 part 'receive_page_controller.mapper.dart';
 
+/// ViewModel for the Receive Page.
+/// Contains all the data needed to display the receive page and handle user actions.
 @MappableClass()
 class ReceivePageVm with ReceivePageVmMappable {
-  final SessionStatus? status;
-  final Device sender;
+  final SessionStatus? status; // Current session status.
+  final Device sender; // Sender device information.
 
-  /// Show hashtag and device model.
-  final bool showSenderInfo;
-  final int fileCount;
-  final String? message;
-  final bool isLink;
-  final bool showFullIp;
-  final void Function() onAccept;
-  final void Function() onDecline;
-  final void Function() onClose;
+  /// Flags and configuration.
+  final bool showSenderInfo; // Whether to show sender info (hashtag and device model).
+  final int fileCount; // Number of files being sent.
+  final String? message; // Optional message accompanying the file transfer.
+  final bool isLink; // Whether the message contains a valid link.
+  final bool showFullIp; // Whether to show the full IP address of the sender.
+
+  /// Callback functions for user actions.
+  final void Function() onAccept; // Callback for accepting file transfer.
+  final void Function() onDecline; // Callback for declining file transfer.
+  final void Function() onClose; // Callback for closing the session.
 
   ReceivePageVm({
     required this.status,
@@ -40,6 +44,7 @@ class ReceivePageVm with ReceivePageVmMappable {
   });
 }
 
+/// Provider for managing the state of the Receive Page controller.
 final receivePageControllerProvider = ReduxProvider<ReceivePageController, ReceivePageVm>((ref) {
   return ReceivePageController(
     server: ref.notifier(serverProvider),
@@ -47,9 +52,11 @@ final receivePageControllerProvider = ReduxProvider<ReceivePageController, Recei
   );
 });
 
+/// Controller for the Receive Page.
+/// Handles business logic, state management, and interactions with services.
 class ReceivePageController extends ReduxNotifier<ReceivePageVm> {
-  final ServerService _server;
-  final SelectedReceivingFilesNotifier _selectedReceivingFiles;
+  final ServerService _server; // Service for managing the server's state and actions.
+  final SelectedReceivingFilesNotifier _selectedReceivingFiles; // Manages selected files for receiving.
 
   ReceivePageController({
     required ServerService server,
@@ -57,6 +64,7 @@ class ReceivePageController extends ReduxNotifier<ReceivePageVm> {
   })  : _server = server,
         _selectedReceivingFiles = selectedReceivingFiles;
 
+  /// Initialize the default state of the Receive Page ViewModel.
   @override
   ReceivePageVm init() {
     return ReceivePageVm(
@@ -83,10 +91,12 @@ class ReceivePageController extends ReduxNotifier<ReceivePageVm> {
     );
   }
 
+  /// Specifies the initial action to watch for updates to session status.
   @override
   get initialAction => _WatchStatusAction();
 }
 
+/// Action to watch and update the session status in the state.
 class _WatchStatusAction extends WatchAction<ReceivePageController, ReceivePageVm> {
   @override
   ReceivePageVm reduce() {
@@ -96,12 +106,13 @@ class _WatchStatusAction extends WatchAction<ReceivePageController, ReceivePageV
   }
 }
 
+/// Action to initialize the Receive Page with data from the current session.
 class InitReceivePageAction extends ReduxAction<ReceivePageController, ReceivePageVm> {
   @override
   ReceivePageVm reduce() {
     final receiveSession = notifier._server.state?.session;
     if (receiveSession == null) {
-      return state;
+      return state; // If no session exists, return the current state.
     }
 
     return state.copyWith(
@@ -113,19 +124,20 @@ class InitReceivePageAction extends ReduxAction<ReceivePageController, ReceivePa
       showFullIp: false,
       onAccept: () async {
         if (state.message != null) {
-          // accept nothing
+          // If a message exists, accept the file transfer without any files.
           notifier._server.acceptFileRequest({});
           return;
         }
 
         final sessionId = notifier._server.state?.session?.sessionId;
         if (sessionId == null) {
-          return;
+          return; // If no session ID exists, do nothing.
         }
 
         final selectedFiles = notifier._selectedReceivingFiles.state;
         notifier._server.acceptFileRequest(selectedFiles);
 
+        // Navigate to the Progress Page to show transfer progress.
         await Routerino.context.pushAndRemoveUntilImmediately(
           removeUntil: ReceivePage,
           builder: () => ProgressPage(
@@ -136,17 +148,18 @@ class InitReceivePageAction extends ReduxAction<ReceivePageController, ReceivePa
         );
       },
       onDecline: () {
-        notifier._server.declineFileRequest();
+        notifier._server.declineFileRequest(); // Decline the file transfer.
       },
       onClose: () {
-        notifier._server.closeSession();
+        notifier._server.closeSession(); // Close the file transfer session.
       },
     );
   }
 }
 
+/// Action to initialize the Receive Page with data from a history entry.
 class InitReceivePageFromHistoryMessageAction extends ReduxAction<ReceivePageController, ReceivePageVm> {
-  final ReceiveHistoryEntry entry;
+  final ReceiveHistoryEntry entry; // The history entry to initialize the page with.
 
   InitReceivePageFromHistoryMessageAction({required this.entry});
 
@@ -164,10 +177,10 @@ class InitReceivePageFromHistoryMessageAction extends ReduxAction<ReceivePageCon
         deviceType: DeviceType.web,
         download: true,
       ),
-      showSenderInfo: false,
+      showSenderInfo: false, // Don't show sender info for history entries.
       fileCount: 1,
       message: entry.fileName,
-      isLink: entry.fileName.isLink,
+      isLink: entry.fileName.isLink, // Determine if the file name is a link.
       showFullIp: false,
       onAccept: () {},
       onDecline: () {},
@@ -176,8 +189,9 @@ class InitReceivePageFromHistoryMessageAction extends ReduxAction<ReceivePageCon
   }
 }
 
+/// Action to toggle the visibility of the full IP address in the state.
 class SetShowFullIpAction extends ReduxAction<ReceivePageController, ReceivePageVm> {
-  final bool showFullIp;
+  final bool showFullIp; // Whether to show the full IP address.
 
   SetShowFullIpAction(this.showFullIp);
 
@@ -189,6 +203,7 @@ class SetShowFullIpAction extends ReduxAction<ReceivePageController, ReceivePage
   }
 }
 
+/// Extension on String to check if it represents a valid link.
 extension on String {
   bool get isLink => Uri.tryParse(this)?.isAbsolute ?? false;
 }

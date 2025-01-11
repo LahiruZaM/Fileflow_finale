@@ -27,10 +27,12 @@ class SelectedReceivingFilesNotifier extends Notifier<Map<String, String>> {
     };
   }
 
+  /// Removes a file from the selection based on its ID.
   void unselect(String fileId) {
     state = {...state}..remove(fileId);
   }
 
+  /// Adds a file to the selection with its original file name.
   void select(FileDto file) {
     state = {
       ...state,
@@ -38,6 +40,7 @@ class SelectedReceivingFilesNotifier extends Notifier<Map<String, String>> {
     };
   }
 
+   /// Renames a file while keeping its extension intact.
   void rename(String fileId, String fileName) {
     state = {...state}..update(fileId, (_) => fileName);
   }

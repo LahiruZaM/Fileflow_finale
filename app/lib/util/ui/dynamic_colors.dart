@@ -14,7 +14,7 @@ class DynamicColors {
 
 final dynamicColorsProvider = Provider<DynamicColors?>((ref) => throw 'not initialized');
 
-/// Returns the dynamic colors.
+
 /// A copy of the dynamic_color_plugin implementation to retrieve the dynamic colors without a widget.
 /// We need to replace [PlatformException] with a generic exception because on Windows 7 it is somehow not a [PlatformException].
 Future<DynamicColors?> getDynamicColors() async {

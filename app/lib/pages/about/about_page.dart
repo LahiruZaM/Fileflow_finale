@@ -3,7 +3,8 @@ import 'package:fileflow/widget/local_send_logo.dart';
 import 'package:fileflow/widget/responsive_list_view.dart';
 import 'package:fileflow/gen/strings.g.dart';
 
-// information about the FileFlow application.
+
+ 
 
 class AboutPage extends StatelessWidget {
   const AboutPage();

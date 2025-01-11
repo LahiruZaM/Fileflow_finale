@@ -19,6 +19,7 @@ class DioCollection {
 /// Changes must be made in common/lib/src/isolate/child/dio_provider.dart also
 final dioProvider = ViewProvider((ref) {
   final securityContext = ref.watch(securityProvider);
+  // Retrieve the discovery timeout value from the settings.
   final discoveryTimeout = ref.watch(settingsProvider.select((state) => state.discoveryTimeout));
   return DioCollection(
     discovery: createDio(Duration(milliseconds: discoveryTimeout), securityContext),

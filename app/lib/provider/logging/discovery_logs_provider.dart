@@ -16,7 +16,7 @@ final discoveryLoggerProvider = NotifierProvider<DiscoveryLogger, List<LogEntry>
 class DiscoveryLogger extends Notifier<List<LogEntry>> {
   DiscoveryLogger();
 
-  /// Initializes the discovery logger with an empty list of log entries.
+  /// Initializes the state with an empty list of log entries.
   @override
   List<LogEntry> init() {
     return [];
