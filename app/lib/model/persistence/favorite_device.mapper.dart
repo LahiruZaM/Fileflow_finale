@@ -6,10 +6,14 @@
 
 part of 'favorite_device.dart';
 
+/// A mapper class for `FavoriteDevice` to handle serialization and deserialization.
 class FavoriteDeviceMapper extends ClassMapperBase<FavoriteDevice> {
   FavoriteDeviceMapper._();
 
+  // Singleton instance of the mapper.
   static FavoriteDeviceMapper? _instance;
+
+  /// Ensures the mapper is initialized and registers it in the global mapper container.
   static FavoriteDeviceMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = FavoriteDeviceMapper._());
@@ -18,21 +22,28 @@ class FavoriteDeviceMapper extends ClassMapperBase<FavoriteDevice> {
   }
 
   @override
-  final String id = 'FavoriteDevice';
+  final String id = 'FavoriteDevice'; // Unique identifier for the mapper.
 
+  // Field mappers for `FavoriteDevice` properties.
   static String _$id(FavoriteDevice v) => v.id;
   static const Field<FavoriteDevice, String> _f$id = Field('id', _$id);
+
   static String _$fingerprint(FavoriteDevice v) => v.fingerprint;
   static const Field<FavoriteDevice, String> _f$fingerprint = Field('fingerprint', _$fingerprint);
+
   static String _$ip(FavoriteDevice v) => v.ip;
   static const Field<FavoriteDevice, String> _f$ip = Field('ip', _$ip);
+
   static int _$port(FavoriteDevice v) => v.port;
   static const Field<FavoriteDevice, int> _f$port = Field('port', _$port);
+
   static String _$alias(FavoriteDevice v) => v.alias;
   static const Field<FavoriteDevice, String> _f$alias = Field('alias', _$alias);
+
   static bool _$customAlias(FavoriteDevice v) => v.customAlias;
   static const Field<FavoriteDevice, bool> _f$customAlias = Field('customAlias', _$customAlias, opt: true, def: false);
 
+  // Defines all the mappable fields for the `FavoriteDevice` class.
   @override
   final MappableFields<FavoriteDevice> fields = const {
     #id: _f$id,
@@ -43,6 +54,7 @@ class FavoriteDeviceMapper extends ClassMapperBase<FavoriteDevice> {
     #customAlias: _f$customAlias,
   };
 
+  // Instantiates a `FavoriteDevice` from the provided decoding data.
   static FavoriteDevice _instantiate(DecodingData data) {
     return FavoriteDevice(
         id: data.dec(_f$id),
@@ -56,26 +68,33 @@ class FavoriteDeviceMapper extends ClassMapperBase<FavoriteDevice> {
   @override
   final Function instantiate = _instantiate;
 
+  /// Decodes a `FavoriteDevice` instance from a map.
   static FavoriteDevice fromJson(Map<String, dynamic> map) {
     return ensureInitialized().decodeMap<FavoriteDevice>(map);
   }
 
+  /// Decodes a `FavoriteDevice` instance from a JSON string.
   static FavoriteDevice deserialize(String json) {
     return ensureInitialized().decodeJson<FavoriteDevice>(json);
   }
 }
 
+/// A mixin to provide mapping capabilities for `FavoriteDevice`.
 mixin FavoriteDeviceMappable {
+  /// Serializes the `FavoriteDevice` to a JSON string.
   String serialize() {
     return FavoriteDeviceMapper.ensureInitialized().encodeJson<FavoriteDevice>(this as FavoriteDevice);
   }
 
+  /// Converts the `FavoriteDevice` to a JSON-compatible map.
   Map<String, dynamic> toJson() {
     return FavoriteDeviceMapper.ensureInitialized().encodeMap<FavoriteDevice>(this as FavoriteDevice);
   }
 
+  /// Provides a copy-with mechanism for `FavoriteDevice`.
   FavoriteDeviceCopyWith<FavoriteDevice, FavoriteDevice, FavoriteDevice> get copyWith =>
       _FavoriteDeviceCopyWithImpl(this as FavoriteDevice, $identity, $identity);
+
   @override
   String toString() {
     return FavoriteDeviceMapper.ensureInitialized().stringifyValue(this as FavoriteDevice);
@@ -92,21 +111,26 @@ mixin FavoriteDeviceMappable {
   }
 }
 
+/// Extension to provide copy-with functionality for `FavoriteDevice`.
 extension FavoriteDeviceValueCopy<$R, $Out> on ObjectCopyWith<$R, FavoriteDevice, $Out> {
-  FavoriteDeviceCopyWith<$R, FavoriteDevice, $Out> get $asFavoriteDevice => $base.as((v, t, t2) => _FavoriteDeviceCopyWithImpl(v, t, t2));
+  FavoriteDeviceCopyWith<$R, FavoriteDevice, $Out> get $asFavoriteDevice =>
+      $base.as((v, t, t2) => _FavoriteDeviceCopyWithImpl(v, t, t2));
 }
 
+/// Abstract copy-with interface for `FavoriteDevice`.
 abstract class FavoriteDeviceCopyWith<$R, $In extends FavoriteDevice, $Out> implements ClassCopyWith<$R, $In, $Out> {
   $R call({String? id, String? fingerprint, String? ip, int? port, String? alias, bool? customAlias});
   FavoriteDeviceCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
+/// Implementation of the copy-with interface for `FavoriteDevice`.
 class _FavoriteDeviceCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, FavoriteDevice, $Out>
     implements FavoriteDeviceCopyWith<$R, FavoriteDevice, $Out> {
   _FavoriteDeviceCopyWithImpl(super.value, super.then, super.then2);
 
   @override
   late final ClassMapperBase<FavoriteDevice> $mapper = FavoriteDeviceMapper.ensureInitialized();
+
   @override
   $R call({String? id, String? fingerprint, String? ip, int? port, String? alias, bool? customAlias}) => $apply(FieldCopyWithData({
         if (id != null) #id: id,
@@ -116,6 +140,7 @@ class _FavoriteDeviceCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Favori
         if (alias != null) #alias: alias,
         if (customAlias != null) #customAlias: customAlias
       }));
+
   @override
   FavoriteDevice $make(CopyWithData data) => FavoriteDevice(
       id: data.get(#id, or: $value.id),
