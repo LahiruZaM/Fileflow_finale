@@ -19,12 +19,16 @@ class ReceiveOptionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ref = context.ref;
+
+    // Watch the current server session. If no session exists, display an empty page.
     final receiveSession = ref.watch(serverProvider.select((s) => s?.session));
     if (receiveSession == null) {
       return Scaffold(
         body: Container(),
       );
     }
+
+    // Watch the state of selected receiving files.
     final selectState = ref.watch(selectedReceivingFilesProvider);
 
     return Scaffold(
@@ -34,6 +38,7 @@ class ReceiveOptionsPage extends StatelessWidget {
       body: ResponsiveListView(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         children: [
+          // Display destination directory selection option.
           Row(
             children: [
               Text(t.receiveOptionsPage.destination, style: Theme.of(context).textTheme.titleLarge),
@@ -54,6 +59,8 @@ class ReceiveOptionsPage extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           Text(checkPlatformWithFileSystem() ? receiveSession.destinationDirectory : t.receiveOptionsPage.appDirectory),
+
+          // Display option to save to gallery if supported by the platform.
           if (checkPlatformWithGallery())
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,6 +99,8 @@ class ReceiveOptionsPage extends StatelessWidget {
               ],
             ),
           const SizedBox(height: 20),
+
+          // Display list of received files with quick actions.
           Row(
             children: [
               Text(t.general.files, style: Theme.of(context).textTheme.titleLarge),
@@ -118,6 +127,8 @@ class ReceiveOptionsPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 5),
+
+          // Display each file with its details and actions (rename, select/unselect).
           ...receiveSession.files.values.map((file) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 10),
