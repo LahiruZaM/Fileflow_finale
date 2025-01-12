@@ -6,22 +6,26 @@
 
 part of 'sync_provider.dart';
 
+// Mapper class for SyncState, which handles serialization and deserialization.
 class SyncStateMapper extends ClassMapperBase<SyncState> {
   SyncStateMapper._();
 
   static SyncStateMapper? _instance;
+  
+  // Ensures that the SyncStateMapper is initialized only once.
   static SyncStateMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = SyncStateMapper._());
-      StoredSecurityContextMapper.ensureInitialized();
-      ProtocolTypeMapper.ensureInitialized();
+      StoredSecurityContextMapper.ensureInitialized(); // Ensures the security context mapper is initialized.
+      ProtocolTypeMapper.ensureInitialized(); // Ensures the protocol type mapper is initialized.
     }
     return _instance!;
   }
 
   @override
-  final String id = 'SyncState';
+  final String id = 'SyncState'; // Identifier for the SyncState class.
 
+  // Fields for mapping each property of the SyncState class.
   static StoredSecurityContext _$securityContext(SyncState v) => v.securityContext;
   static const Field<SyncState, StoredSecurityContext> _f$securityContext = Field('securityContext', _$securityContext);
   static DeviceInfoResult _$deviceInfo(SyncState v) => v.deviceInfo;
@@ -54,6 +58,7 @@ class SyncStateMapper extends ClassMapperBase<SyncState> {
     #download: _f$download,
   };
 
+  // Instantiates the SyncState class by decoding the data.
   static SyncState _instantiate(DecodingData data) {
     return SyncState(
         securityContext: data.dec(_f$securityContext),
@@ -70,47 +75,64 @@ class SyncStateMapper extends ClassMapperBase<SyncState> {
   @override
   final Function instantiate = _instantiate;
 
+  // Converts a JSON map to a SyncState object.
   static SyncState fromJson(Map<String, dynamic> map) {
     return ensureInitialized().decodeMap<SyncState>(map);
   }
 
+  // Converts a JSON string to a SyncState object.
   static SyncState deserialize(String json) {
     return ensureInitialized().decodeJson<SyncState>(json);
   }
 }
 
+// Mixin for SyncState to support serialization and deserialization functionality.
 mixin SyncStateMappable {
+  
+  // Serializes the SyncState object to a JSON string.
   String serialize() {
     return SyncStateMapper.ensureInitialized().encodeJson<SyncState>(this as SyncState);
   }
 
+  // Converts the SyncState object to a JSON map.
   Map<String, dynamic> toJson() {
     return SyncStateMapper.ensureInitialized().encodeMap<SyncState>(this as SyncState);
   }
 
+  // Provides a copyWith functionality for SyncState to modify its fields.
   SyncStateCopyWith<SyncState, SyncState, SyncState> get copyWith => _SyncStateCopyWithImpl(this as SyncState, $identity, $identity);
+  
+  // Custom toString method for better logging and debugging.
   @override
   String toString() {
     return SyncStateMapper.ensureInitialized().stringifyValue(this as SyncState);
   }
 
+  // Custom equality operator to compare SyncState instances.
   @override
   bool operator ==(Object other) {
     return SyncStateMapper.ensureInitialized().equalsValue(this as SyncState, other);
   }
 
+  // Hash code implementation for SyncState.
   @override
   int get hashCode {
     return SyncStateMapper.ensureInitialized().hashValue(this as SyncState);
   }
 }
 
+// Extension to support copying SyncState values.
 extension SyncStateValueCopy<$R, $Out> on ObjectCopyWith<$R, SyncState, $Out> {
+  // Provides a typed copyWith method for SyncState.
   SyncStateCopyWith<$R, SyncState, $Out> get $asSyncState => $base.as((v, t, t2) => _SyncStateCopyWithImpl(v, t, t2));
 }
 
+// Interface for copying SyncState objects and chaining changes.
 abstract class SyncStateCopyWith<$R, $In extends SyncState, $Out> implements ClassCopyWith<$R, $In, $Out> {
+  // Provides a copyWith method for the security context field.
   StoredSecurityContextCopyWith<$R, StoredSecurityContext, StoredSecurityContext> get securityContext;
+  
+  // Allows copying and updating SyncState fields.
   $R call(
       {StoredSecurityContext? securityContext,
       DeviceInfoResult? deviceInfo,
@@ -121,18 +143,25 @@ abstract class SyncStateCopyWith<$R, $In extends SyncState, $Out> implements Cla
       int? discoveryTimeout,
       bool? serverRunning,
       bool? download});
+
+  // Chains multiple copyWith operations.
   SyncStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
+// Implementation of the SyncState copyWith functionality.
 class _SyncStateCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, SyncState, $Out> implements SyncStateCopyWith<$R, SyncState, $Out> {
   _SyncStateCopyWithImpl(super.value, super.then, super.then2);
 
   @override
   late final ClassMapperBase<SyncState> $mapper = SyncStateMapper.ensureInitialized();
+  
   @override
+  // Provides copyWith functionality for the security context field.
   StoredSecurityContextCopyWith<$R, StoredSecurityContext, StoredSecurityContext> get securityContext =>
       $value.securityContext.copyWith.$chain((v) => call(securityContext: v));
+  
   @override
+  // Allows copying and updating SyncState fields.
   $R call(
           {StoredSecurityContext? securityContext,
           DeviceInfoResult? deviceInfo,
@@ -154,7 +183,9 @@ class _SyncStateCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, SyncState, 
         if (serverRunning != null) #serverRunning: serverRunning,
         if (download != null) #download: download
       }));
+  
   @override
+  // Creates a new SyncState instance with the updated values.
   SyncState $make(CopyWithData data) => SyncState(
       securityContext: data.get(#securityContext, or: $value.securityContext),
       deviceInfo: data.get(#deviceInfo, or: $value.deviceInfo),
@@ -167,5 +198,4 @@ class _SyncStateCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, SyncState, 
       download: data.get(#download, or: $value.download));
 
   @override
-  SyncStateCopyWith<$R2, SyncState, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) => _SyncStateCopyWithImpl($value, $cast, t);
-}
+ 
