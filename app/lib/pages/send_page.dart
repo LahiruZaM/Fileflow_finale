@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:common/model/device.dart';
 import 'package:common/model/session_status.dart';
