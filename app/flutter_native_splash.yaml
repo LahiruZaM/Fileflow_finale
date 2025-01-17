@@ -1,27 +1,41 @@
 flutter_native_splash:
-  color: "#FFFFFF"
-  image: assets/img/app_logo.png
+  # Defines the background color for the splash screen in light mode.
+  color: "#FFFFFF" 
+  # Sets the splash screen logo image for light mode.
+  image: assets/img/app_logo.png 
 
-  color_dark: "#1C1C1C"
-  image_dark: assets/img/img_app_logo_dark.png
+  # Defines the background color for the splash screen in dark mode.
+  color_dark: "#1C1C1C" 
+  # Sets the splash screen logo image for dark mode.
+  image_dark: assets/img/img_app_logo_dark.png 
 
+  # Android 12-specific configuration:
   android_12:
-    image: assets/img/app_logo.png
-    color: "#FFFFFF"
-    image_dark: assets/img/img_app_logo_dark.png
-    color_dark: "#1C1C1C"
+    # Defines the logo image for light mode in Android 12.
+    image: assets/img/app_logo.png 
+    # Defines the background color for light mode in Android 12.
+    color: "#FFFFFF" 
+    # Defines the logo image for dark mode in Android 12.
+    image_dark: assets/img/img_app_logo_dark.png 
+    # Defines the background color for dark mode in Android 12.
+    color_dark: "#1C1C1C" 
 
+  # Additional Android-specific configurations:
+  color_android: "#FFFFFF" # Background color for light mode on Android.
+  color_dark_android: "#1C1C1C" # Background color for dark mode on Android.
+  image_android: assets/img/app_logo.png # Logo image for light mode on Android.
+  image_dark_android: assets/img/img_app_logo_dark.png # Logo image for dark mode on Android.
 
-  color_android: "#FFFFFF"
-  color_dark_android: "#1C1C1C"
-  color_ios: "#FFFFFF"
-  color_dark_ios: "#1C1C1C"
-  image_android: assets/img/app_logo.png
-  image_dark_android: assets/img/img_app_logo_dark.png
-  image_ios: assets/img/app_logo.png
-  image_dark_ios: assets/img/img_app_logo_dark.png
+  # Additional iOS-specific configurations:
+  color_ios: "#FFFFFF" # Background color for light mode on iOS.
+  color_dark_ios: "#1C1C1C" # Background color for dark mode on iOS.
+  image_ios: assets/img/app_logo.png # Logo image for light mode on iOS.
+  image_dark_ios: assets/img/img_app_logo_dark.png # Logo image for dark mode on iOS.
 
-  android_gravity: center
-  ios_content_mode: center
+  # Aligns the splash screen logo to the center on Android devices.
+  android_gravity: center 
+  # Sets the splash screen content mode to center on iOS devices.
+  ios_content_mode: center 
 
-  fullscreen: true
+  # Enables a fullscreen splash screen on all platforms.
+  fullscreen: true 
