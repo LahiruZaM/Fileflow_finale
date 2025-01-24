@@ -3,6 +3,7 @@ import 'package:dart_mappable/dart_mappable.dart';
 part 'device.mapper.dart';
 
 @MappableEnum(defaultValue: DeviceType.desktop)
+
 enum DeviceType {
   mobile,
   desktop,
